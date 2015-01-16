@@ -80,12 +80,12 @@ dlg_title = 'Wczytywanie danych';
 num_lines = 1;
 def = {'cars.mat'};
 answer = inputdlg(prompt,dlg_title,num_lines,def);
-load cars;
+handles.maindb=load('cars.mat');
 guidata(hObject,handles)
-cars.Properties.VarNames
+handles.maindb.Properties.VarNames
 
-set(handles.datatable,'data',dataset2cell(cars));
-set(handles.datatable,'ColumnName',cars.Properties.VarNames);
+%set(handles.datatable,'data',struct2cell(maindb));
+% set(handles.datatable,'ColumnName',maindb.Properties.VarNames);
 
 
 
