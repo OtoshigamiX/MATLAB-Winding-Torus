@@ -22,7 +22,7 @@ function varargout = eda(varargin)
 
 % Edit the above text to modify the response to help eda
 
-% Last Modified by GUIDE v2.5 16-Jan-2015 15:19:12
+% Last Modified by GUIDE v2.5 16-Jan-2015 20:44:25
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -86,6 +86,13 @@ data_cell=dataset2cell(loaded_data);
 data_cell(1,:)=[];
 set(handles.datatable,'data',data_cell);
 set(handles.datatable,'ColumnName',loaded_data.Properties.VarNames);
+set(handles.var1menu,'String',loaded_data.Properties.VarNames);
+set(handles.var2menu,'String',loaded_data.Properties.VarNames);
+set(handles.var3menu,'String',loaded_data.Properties.VarNames); %populacja list, które bêd¹ potem potrzebne
+handles.maindb = loaded_data; %zmienna maindb bêdzie naszym datasetem
+guidata(hObject, handles); %odœwie¿amy handle
+
+
 
 
 
@@ -111,3 +118,125 @@ function maindbmenu_Callback(hObject, eventdata, handles)
 
 
 
+
+
+% --- Executes on button press in testbutton.
+function testbutton_Callback(hObject, eventdata, handles)
+%faza pierwsza
+emptycnt=[];
+for k = 1:(size(handles.maindb))(2)
+    for l=1:(size(handles.maindb))(1)
+        if isempty(handles.maindb{l,k})
+            emptycnt(length(emptycnt)+1)=l;
+        end
+    end
+    if ~isempty(emptycnt)
+        choice = questdlg(strcat('Wykryto ',emptycnt,' pustych rekordów w kolumnie ',handles.maindb.Properties.VarNames(k),'. Co z nimi zrobiæ? '), ...
+            'Faza 1', ...
+            'Sta³a','Œrednia','Losowa wartoœæ','Losowa wartoœæ');
+        switch choice
+            case 'Sta³a'
+                if iscellstr(handles.maindb{1,k})
+                    for m=1:size(emptycnt)
+                        handles.maindb{m,k} = 'missing';
+                    end
+                else
+                    for m=1:size(emptycnt)
+                        handles.maindb{m,k} = 0;
+                    end
+                end
+            case 'Œrednia'
+                if iscellstr(handles.maindb{1,k})
+                    for m=1:size(emptycnt)
+                        h = msgbox('Niedostêpne dla wartoœci nieliczbowych','Uwaga!');
+                    end
+                else
+                    for m=1:size(emptycnt)
+                        handles.maindb{m,k} = mean(handles.maindb.(handles.maindb.Properties.VarNames(k)));
+                    end
+                end
+            case 'Losowa wartoœæ'
+                if iscellstr(handles.maindb{1,k})
+                    for m=1:size(emptycnt)
+                        h = msgbox('Niedostêpne dla wartoœci nieliczbowych','Uwaga!'); %placeholder
+                    end
+                else
+                    for m=1:size(emptycnt)
+                        handles.maindb{m,k} = mean(handles.maindb.(handles.maindb.Properties.VarNames(k))); %placeholder
+                    end
+                end
+        end
+    end
+    emptycnt = [];
+end
+
+    
+
+
+% --- Executes on selection change in var1menu.
+function var1menu_Callback(hObject, eventdata, handles)
+% hObject    handle to var1menu (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: contents = cellstr(get(hObject,'String')) returns var1menu contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from var1menu
+
+
+% --- Executes during object creation, after setting all properties.
+function var1menu_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to var1menu (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: popupmenu controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on selection change in var2menu.
+function var2menu_Callback(hObject, eventdata, handles)
+% hObject    handle to var2menu (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: contents = cellstr(get(hObject,'String')) returns var2menu contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from var2menu
+
+
+% --- Executes during object creation, after setting all properties.
+function var2menu_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to var2menu (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: popupmenu controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on selection change in var3menu.
+function var3menu_Callback(hObject, eventdata, handles)
+% hObject    handle to var3menu (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: contents = cellstr(get(hObject,'String')) returns var3menu contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from var3menu
+
+
+% --- Executes during object creation, after setting all properties.
+function var3menu_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to var3menu (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: popupmenu controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
