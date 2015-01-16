@@ -84,8 +84,9 @@ load cars;
 guidata(hObject,handles)
 cars.Properties.VarNames
 
-%set(handles.datatable,'data',struct2cell(maindb));
-% set(handles.datatable,'ColumnName',maindb.Properties.VarNames);
+set(handles.datatable,'data',dataset2cell(cars));
+set(handles.datatable,'ColumnName',cars.Properties.VarNames);
+
 
 
 
