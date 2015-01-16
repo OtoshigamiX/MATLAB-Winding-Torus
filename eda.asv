@@ -78,13 +78,14 @@ function loadbutton_Callback(hObject, eventdata, handles)
 prompt = {'Podaj nazwe bazy do wczytania:'};
 dlg_title = 'Wczytywanie danych';
 num_lines = 1;
-def = {'data\cars.mat'};
+def = {'cars.mat'};
 answer = inputdlg(prompt,dlg_title,num_lines,def);
-as
-loaded_data=dataset('File',[answer{1}],'Delimiter',',','ReadVarNames',true);
+handles.maindb=load('cars.mat');
+guidata(hObject,handles)
+handles.maindb.Properties.VarNames
 
-set(handles.datatable,'data',dataset2cell(loaded_data));
-set(handles.datatable,'ColumnName',loaded_data.Properties.VarNames);
+%set(handles.datatable,'data',struct2cell(maindb));
+% set(handles.datatable,'ColumnName',maindb.Properties.VarNames);
 
 
 
