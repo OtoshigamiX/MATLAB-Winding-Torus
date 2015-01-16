@@ -81,8 +81,10 @@ num_lines = 1;
 def = {'data\cars.txt'};
 answer = inputdlg(prompt,dlg_title,num_lines,def);
 loaded_data=dataset('File',answer{1},'Delimiter',',','ReadVarNames',true);
-
-set(handles.datatable,'data',dataset2cell(loaded_data));
+%assignin('base','datacell',dataset2cell(loaded_data)); debug
+data_cell=dataset2cell(loaded_data);
+data_cell(1,:)=[];
+set(handles.datatable,'data',data_cell);
 set(handles.datatable,'ColumnName',loaded_data.Properties.VarNames);
 
 
