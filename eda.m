@@ -22,7 +22,7 @@ function varargout = eda(varargin)
 
 % Edit the above text to modify the response to help eda
 
-% Last Modified by GUIDE v2.5 25-Jan-2015 12:43:50
+% Last Modified by GUIDE v2.5 25-Jan-2015 15:13:38
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -136,7 +136,7 @@ for k = 1:(size(handles.maindb))(2)
             'Sta³a','Œrednia','Losowa wartoœæ','Losowa wartoœæ');
         switch choice
             case 'Sta³a'
-                if iscellstr(handles.maindb{1,k})
+                if isstr(handles.maindb{1,k})
                     for m=1:size(emptycnt)
                         handles.maindb{m,k} = 'missing';
                     end
@@ -176,12 +176,23 @@ end
 
 % --- Executes on selection change in var1menu.
 function var1menu_Callback(hObject, eventdata, handles)
-% hObject    handle to var1menu (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: contents = cellstr(get(hObject,'String')) returns var1menu contents as cell array
-%        contents{get(hObject,'Value')} returns selected item from var1menu
+tmp_int = get(handles.var1menu,'Value');
+if isstr(handles.maindb{1,tmp_int})
+    tmp_str='Typ: dane jakoœciowe';
+    main_str=tmp_str;
+    set(handles.text1,'String',main_str);
+else
+    tmp_str='Typ: dane liczbowe';
+    tmp_max=num2str(max(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int})));
+    tmp_min=num2str(min(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int})));
+    tmp_q1=num2str(quantile(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int}),.25));
+    tmp_median=num2str(median(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int})));
+    tmp_q3=num2str(quantile(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int}),.75));
+    tmp_mean=num2str(mean(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int})));
+    %main_str=strcat(tmp_str,'\n',tmp_max,char(13),tmp_min,'\n',tmp_q1,'\n',tmp_median,'\n',tmp_q3,'\n',tmp_mean);
+    main_str=sprintf('%s \n Maksimum : %s \n Minimum : %s \n Pierwszy kwantyl: %s \n  Mediana : %s \n Trzeci kwantyl: %s \n Œrednia: %s \n',tmp_str,tmp_max,tmp_min,tmp_q1,tmp_median,tmp_q3,tmp_mean);
+    set(handles.text1,'String',main_str); 
+end
 
 
 % --- Executes during object creation, after setting all properties.
@@ -199,12 +210,24 @@ end
 
 % --- Executes on selection change in var2menu.
 function var2menu_Callback(hObject, eventdata, handles)
-% hObject    handle to var2menu (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+tmp_int = get(handles.var2menu,'Value')
+if isstr(handles.maindb{1,tmp_int})
+    tmp_str='Typ: dane jakoœciowe';
+    main_str=tmp_str;
+    set(handles.text2,'String',main_str);
+else
+    tmp_str='Typ: dane liczbowe';
+    tmp_max=num2str(max(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int})));
+    tmp_min=num2str(min(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int})));
+    tmp_q1=num2str(quantile(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int}),.25));
+    tmp_median=num2str(median(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int})));
+    tmp_q3=num2str(quantile(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int}),.75));
+    tmp_mean=num2str(mean(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int})));
+    %main_str=strcat(tmp_str,'\n',tmp_max,char(13),tmp_min,'\n',tmp_q1,'\n',tmp_median,'\n',tmp_q3,'\n',tmp_mean);
+    main_str=sprintf('%s \n Maksimum : %s \n Minimum : %s \n Pierwszy kwantyl: %s \n  Mediana : %s \n Trzeci kwantyl: %s \n Œrednia: %s \n',tmp_str,tmp_max,tmp_min,tmp_q1,tmp_median,tmp_q3,tmp_mean);
+    set(handles.text2,'String',main_str); 
+end
 
-% Hints: contents = cellstr(get(hObject,'String')) returns var2menu contents as cell array
-%        contents{get(hObject,'Value')} returns selected item from var2menu
 
 
 % --- Executes during object creation, after setting all properties.
@@ -222,12 +245,24 @@ end
 
 % --- Executes on selection change in var3menu.
 function var3menu_Callback(hObject, eventdata, handles)
-% hObject    handle to var3menu (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+tmp_int = get(handles.var3menu,'Value')
+if isstr(handles.maindb{1,tmp_int})
+    tmp_str='Typ: dane jakoœciowe';
+    main_str=tmp_str;
+    set(handles.text3,'String',main_str);
+else
+    tmp_str='Typ: dane liczbowe';
+    tmp_max=num2str(max(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int})));
+    tmp_min=num2str(min(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int})));
+    tmp_q1=num2str(quantile(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int}),.25));
+    tmp_median=num2str(median(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int})));
+    tmp_q3=num2str(quantile(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int}),.75));
+    tmp_mean=num2str(mean(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int})));
+    %main_str=strcat(tmp_str,'\n',tmp_max,char(13),tmp_min,'\n',tmp_q1,'\n',tmp_median,'\n',tmp_q3,'\n',tmp_mean);
+    main_str=sprintf('%s \n Maksimum : %s \n Minimum : %s \n Pierwszy kwantyl: %s \n  Mediana : %s \n Trzeci kwantyl: %s \n Œrednia: %s \n',tmp_str,tmp_max,tmp_min,tmp_q1,tmp_median,tmp_q3,tmp_mean);
+    set(handles.text3,'String',main_str); 
+end
 
-% Hints: contents = cellstr(get(hObject,'String')) returns var3menu contents as cell array
-%        contents{get(hObject,'Value')} returns selected item from var3menu
 
 
 % --- Executes during object creation, after setting all properties.
@@ -250,3 +285,93 @@ figure(1);
 hist(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int}));
 title(handles.maindb.Properties.VarNames{tmp_int});
 
+
+
+% --- Executes on button press in standbutton.
+function standbutton_Callback(hObject, eventdata, handles)
+% hObject    handle to standbutton (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+
+% --- Executes on button press in normbutton.
+function normbutton_Callback(hObject, eventdata, handles)
+tmp_int = get(handles.var1menu,'Value');
+tmp_min=min(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int}));
+tmp_max=max(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int}));
+tmp_size=size(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int}));
+for l=1:tmp_size
+    handles.maindb{l,tmp_int}=((handles.maindb{l,tmp_int}-tmp_min)/(tmp_max-tmp_min)); % jakiœ b³¹d, plz halp (jak zrobisz to to mozna przekleiæ do standaryzacji)
+end
+data_cell=dataset2cell(handles.maindb);
+data_cell(1,:)=[];
+set(handles.datatable,'data',data_cell);
+guidata(hObject, handles);
+
+
+
+
+% --- Executes on button press in scatterbutton.
+function scatterbutton_Callback(hObject, eventdata, handles)
+tmp_int = get(handles.var1menu,'Value');
+tmp_int2 = get(handles.var2menu,'Value');
+figure(1);
+scatter(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int}),handles.maindb.(handles.maindb.Properties.VarNames{tmp_int2}));
+title(handles.maindb.Properties.VarNames{tmp_int});
+
+
+% --- Executes on button press in scatter3button.
+function scatter3button_Callback(hObject, eventdata, handles)
+tmp_int = get(handles.var1menu,'Value');
+tmp_int2 = get(handles.var2menu,'Value');
+tmp_int3 = get(handles.var3menu,'Value');
+figure(1);
+scatter3(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int}),handles.maindb.(handles.maindb.Properties.VarNames{tmp_int2}),handles.maindb.(handles.maindb.Properties.VarNames{tmp_int3}));
+title(handles.maindb.Properties.VarNames{tmp_int});
+
+
+% --- Executes on button press in tourbutton.
+function tourbutton_Callback(hObject, eventdata, handles) % przeklejony kod, jeszcze nie powinien dzia³aæ (swoj¹ drog¹, wymaga chyba oczyszczenia z danych tesktowych)
+[n,p] = size(handles.maindb);
+% Tworzymy wektor czêstoœci
+N = 2*p - 3;
+% U¿ywamy drugiej opcji.
+lam = mod(exp(1:N),1);
+% Ma³y irrational numer:
+delt = exp(-5);
+% Get the indices to build the rotations.
+% As in step 1 of the torus method.
+J = 2:p;
+I = ones(1,length(J));
+I = [I, 2*ones(1,length(J)-1)];
+J = [J, 3:p];
+E = eye(p,2); % Basis vectors
+% Just do the tour for some number of iterations.
+maxit = 2150;
+z = zeros(n,2);
+ph = plot(z(:,1),z(:,2),'o','erasemode','normal');
+axis equal, axis off
+% Use some Handle Graphics to remove flicker.
+set(gcf,'backingstore','off','renderer',...
+    'painters','DoubleBuffer','on')
+% Start the tour.
+for k = 1:maxit
+    % Find the rotation matrix.
+    Q = eye(p);
+    for j = 1:N
+        dum = eye(p);
+        dum([I(j),J(j)],[I(j),J(j)]) = ...
+            cos(lam(j)*k*delt);
+        dum(I(j),J(j)) = -sin(lam(j)*k*delt);
+        dum(J(j),I(j)) = sin(lam(j)*k*delt);
+        Q = Q*dum;
+    end
+    % Rotate basis vectors.
+    A = Q*E;
+    % Project onto the new basis vectors.
+    z = data*A;
+    % Plot the transformed data.
+    set(ph,'xdata',z(:,1),'ydata',z(:,2))
+    % Forces Matlab to plot the data.
+    pause(0.02)
+end
