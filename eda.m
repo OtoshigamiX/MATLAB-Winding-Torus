@@ -22,7 +22,7 @@ function varargout = eda(varargin)
 
 % Edit the above text to modify the response to help eda
 
-% Last Modified by GUIDE v2.5 16-Jan-2015 20:44:25
+% Last Modified by GUIDE v2.5 25-Jan-2015 12:43:50
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -169,6 +169,7 @@ for k = 1:(size(handles.maindb))(2)
     end
     emptycnt = [];
 end
+%faza druga
 
     
 
@@ -240,3 +241,12 @@ function var3menu_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+
+% --- Executes on button press in histbutton.
+function histbutton_Callback(hObject, eventdata, handles)
+tmp_int = get(handles.var1menu,'Value');
+figure(1);
+hist(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int}));
+title(handles.maindb.Properties.VarNames{tmp_int});
+

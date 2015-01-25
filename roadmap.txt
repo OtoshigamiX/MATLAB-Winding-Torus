@@ -1,0 +1,11 @@
+1. Wczytanie bazy danych - DONE
+2. Przygotowanie bazy do EDA
+a) brakujace wartosci - IN PROGRESS
+b) outliers
+c) nieodpowiedni format
+3. Przeksztalcanie - normalizacja i standaryzacja
+4.Hipotezy
+5. Wykresy slupokowe, histogramy
+6. Opcja wypierdolenia kolumny
+7. Korelacja
+8. Scatter Plot i Data Tour
