@@ -75,12 +75,13 @@ varargout{1} = handles.output;
 
 % --- Executes on button press in loadbutton.
 function loadbutton_Callback(hObject, eventdata, handles)
-prompt = {'Podaj nazwe bazy do wczytania:'};
+prompt = [{'Podaj nazwe bazy do wczytania:'} {'Podaj delimiter:'} {'Czy pierwszy wiersz to tytu³y kolumn?'}];
 dlg_title = 'Wczytywanie danych';
-num_lines = 1;
-def = {'data\cars.txt'};
+num_lines = [1 1 1]';
+def = [{'data\cars.txt'} {','} {'tak'}];
 answer = inputdlg(prompt,dlg_title,num_lines,def);
-loaded_data=dataset('File',answer{1},'Delimiter',',','ReadVarNames',true);
+%assignin('base','answer',answer);
+loaded_data=dataset('File',answer{1},'Delimiter',answer{2},'ReadVarNames',strcmp('tak',answer{3}));
 %assignin('base','datacell',dataset2cell(loaded_data)); debug
 data_cell=dataset2cell(loaded_data);
 data_cell(1,:)=[];

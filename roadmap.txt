@@ -9,7 +9,6 @@ c) nieodpowiedni format  - OPTIONAL
 6. usuwanie kolumn z tekstem - DONE
 7. Korelacja
 8. Scatter Plot DONE 
-
 9. Dane - DONE (odchylenie standardowe trzeba dorzucić)
 10. Data Tour - wrzucilem gotowy algorytm, nalezy go przekonwertowac do naszej bazy i !!!! zrobic by odnosilo sie do figure(1), a nie do wykresu w GUI, bo takowego nie praktykujemy - DONE
 11. Gwiazda żydowska w data - DONE
