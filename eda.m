@@ -344,8 +344,8 @@ title(handles.maindb.Properties.VarNames{tmp_int});
 
 % --- Executes on button press in tourbutton.
 function tourbutton_Callback(hObject, eventdata, handles) % przeklejony kod, jeszcze nie powinien dzia³aæ (swoj¹ drog¹, wymaga chyba oczyszczenia z danych tesktowych)
-[n,p] = size(handles.maindb);
-%data=handles.maindb; %might not be needed
+data=double(stringColsPurger(handles.maindb));
+[n,p] = size(data);
 % Tworzymy wektor czêstoœci
 N = 2*p - 3;
 % U¿ywamy drugiej opcji.
@@ -362,6 +362,7 @@ E = eye(p,2); % Basis vectors
 % Just do the tour for some number of iterations.
 maxit = 2150;
 z = zeros(n,2);
+figure(1);
 ph = plot(z(:,1),z(:,2),'o','erasemode','normal');
 axis equal, axis off
 % Use some Handle Graphics to remove flicker.
