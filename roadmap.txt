@@ -1,12 +1,15 @@
 1. Wczytanie bazy danych - DONE
 2. Przygotowanie bazy do EDA - PROGRESS
-a) brakujace wartosci - IN PROGRESS
+a) brakujace wartosci - IN PROGRESS (fix needed)
 b) outliers
 c) nieodpowiedni format  - OPTIONAL
 3. Przeksztalcanie - normalizacja i standaryzacja - DONE
 4. Hipotezy chi kwadrat i pierdo?y inne - OPTIONAL
-5. Wykresy slupokowe, histogramy
+5. Wykresy slupokowe, histogramy - histogramy done
+6. usuwanie kolumn z tekstem - DONE
 7. Korelacja
 8. Scatter Plot DONE 
-10. Data Tour - wrzucilem gotowy algorytm, nalezy go przekonwertowac do naszej bazy i !!!! zrobic by odnosilo sie do figure(1), a nie do wykresu w GUI, bo takowego nie praktykujemy
-9. Dane - DONE (mozna jedynie dorzucic pierdoly)
+
+9. Dane - DONE (odchylenie standardowe trzeba dorzucić)
+10. Data Tour - wrzucilem gotowy algorytm, nalezy go przekonwertowac do naszej bazy i !!!! zrobic by odnosilo sie do figure(1), a nie do wykresu w GUI, bo takowego nie praktykujemy - DONE
+11. Gwiazda żydowska w data - DONE
