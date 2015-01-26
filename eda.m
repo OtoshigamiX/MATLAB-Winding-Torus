@@ -345,6 +345,7 @@ title(handles.maindb.Properties.VarNames{tmp_int});
 % --- Executes on button press in tourbutton.
 function tourbutton_Callback(hObject, eventdata, handles) % przeklejony kod, jeszcze nie powinien dzia³aæ (swoj¹ drog¹, wymaga chyba oczyszczenia z danych tesktowych)
 [n,p] = size(handles.maindb);
+%data=handles.maindb; %might not be needed
 % Tworzymy wektor czêstoœci
 N = 2*p - 3;
 % U¿ywamy drugiej opcji.
