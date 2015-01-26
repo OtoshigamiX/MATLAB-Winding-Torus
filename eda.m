@@ -289,9 +289,19 @@ title(handles.maindb.Properties.VarNames{tmp_int});
 
 % --- Executes on button press in standbutton.
 function standbutton_Callback(hObject, eventdata, handles)
-% hObject    handle to standbutton (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+tmp_int = get(handles.var1menu,'Value');
+tmp_mean=mean(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int}));
+tmp_std=std(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int}));
+tmp_size=size(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int}));
+database=handles.maindb;
+for l=1:tmp_size
+    database{l,tmp_int}=((database{l,tmp_int}-tmp_mean)/(tmp_std)); 
+end
+handles.maindb=database;
+data_cell=dataset2cell(database);
+data_cell(1,:)=[];
+set(handles.datatable,'data',data_cell);
+guidata(hObject, handles);
 
 
 % --- Executes on button press in normbutton.
@@ -300,10 +310,12 @@ tmp_int = get(handles.var1menu,'Value');
 tmp_min=min(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int}));
 tmp_max=max(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int}));
 tmp_size=size(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int}));
+database=handles.maindb;
 for l=1:tmp_size
-    handles.maindb{l,tmp_int}=((handles.maindb{l,tmp_int}-tmp_min)/(tmp_max-tmp_min)); % jakiœ b³¹d, plz halp (jak zrobisz to to mozna przekleiæ do standaryzacji)
+    database{l,tmp_int}=((database{l,tmp_int}-tmp_min)/(tmp_max-tmp_min)); 
 end
-data_cell=dataset2cell(handles.maindb);
+handles.maindb=database;
+data_cell=dataset2cell(database);
 data_cell(1,:)=[];
 set(handles.datatable,'data',data_cell);
 guidata(hObject, handles);

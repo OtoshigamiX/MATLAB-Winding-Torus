@@ -2,11 +2,11 @@
 2. Przygotowanie bazy do EDA - PROGRESS
 a) brakujace wartosci - IN PROGRESS
 b) outliers
-c) nieodpowiedni format
-3. Przeksztalcanie - normalizacja i standaryzacja - PROBLEM
-4. Hipotezy
+c) nieodpowiedni format  - OPTIONAL
+3. Przeksztalcanie - normalizacja i standaryzacja - DONE
+4. Hipotezy chi kwadrat i pierdo?y inne - OPTIONAL
 5. Wykresy slupokowe, histogramy
 7. Korelacja
 8. Scatter Plot DONE 
-10. Data Tour
+10. Data Tour - wrzucilem gotowy algorytm, nalezy go przekonwertowac do naszej bazy i !!!! zrobic by odnosilo sie do figure(1), a nie do wykresu w GUI, bo takowego nie praktykujemy
 9. Dane - DONE (mozna jedynie dorzucic pierdoly)
