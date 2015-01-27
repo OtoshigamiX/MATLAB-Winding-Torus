@@ -1,7 +1,7 @@
 1. Wczytanie bazy danych - DONE
 2. Przygotowanie bazy do EDA - PROGRESS
 a) brakujace wartosci - SEEMS TO BE WORKING
-b) outliers - Normalizacja to za³atwi (?)
+b) outliers - Normalizacja to za³atwi (?) [ALE GDZIE J¥ MAMY? CZY¯BY W£AŒNIE TUTAJ POWINNIŒMY J¥ ROBIÆ? ._.]
 c) nieodpowiedni format  - OPTIONAL
 3. Przeksztalcanie - normalizacja i standaryzacja - DONE
 4. Hipotezy chi kwadrat i pierdo?y inne - OPTIONAL
