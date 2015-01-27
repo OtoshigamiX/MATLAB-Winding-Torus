@@ -127,12 +127,12 @@ function testbutton_Callback(hObject, eventdata, handles)
 emptycnt=[];
 for k = 1:(size(handles.maindb))(2)
     for l=1:(size(handles.maindb))(1)
-        if isempty(handles.maindb{l,k})
+        if isempty(handles.maindb{l,k}) | isnan(handles.maindb{l,k});
             emptycnt(length(emptycnt)+1)=l;
         end
     end
     if ~isempty(emptycnt)
-        choice = questdlg(strcat('Wykryto ',emptycnt,' pustych rekordów w kolumnie ',handles.maindb.Properties.VarNames(k),'. Co z nimi zrobiæ? '), ...
+        choice = questdlg(strcat('Wykryto ',num2str(emptycnt),' pustych rekordów w kolumnie ',handles.maindb.Properties.VarNames(k),'. Co z nimi zrobiæ? '), ...
             'Faza 1', ...
             'Sta³a','Œrednia','Losowa wartoœæ','Losowa wartoœæ');
         switch choice
