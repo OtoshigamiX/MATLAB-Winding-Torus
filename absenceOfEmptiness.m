@@ -14,26 +14,28 @@ if isnumeric(data(1))
             sum=data(i)+sum;
         end
     end
-    msg=['Wykryto ' num2str(nancount) ' pustych rekordow w ' dataname '. Co chcesz zrobic?'];
-    choice=questdlg(msg,'Faza 1', 'Stala', 'Srednia', 'Wartosc losowa', 'Wartosc losowa');
-    switch choice
-        case 'Stala'
-            answer=inputdlg({'Podaj stala: '},'Stala',1,{'0'});
-            filler=str2num(answer{1});
-            for i=1:nancount;
-                data(nanindexes(i))=filler;
-            end
-        case 'Srednia'
-            filler=sum/count;
-            for i=1:nancount
-                data(nanindexes(i))=filler;
-            end
-        case 'Wartosc losowa'
-            answer=inputdlg([{'Podaj zakres: '} {''}],'Zakres losowania',[1 1],[{'0'} {'1'}]);%okienko siê zepsu³o, chuj wie czemu
-            a=str2num(answer{1}); b=str2num(answer{2});
-            for i=1:nancount
-                data(nanindexes(i))=(b-a)*rand+a;%ew. randi([a b])
-            end
+    if nancount~=0
+        msg=['Wykryto ' num2str(nancount) ' pustych rekordow w ' dataname '. Co chcesz zrobic?'];
+        choice=questdlg(msg,'Faza 1', 'Stala', 'Srednia', 'Wartosc losowa', 'Wartosc losowa');
+        switch choice
+            case 'Stala'
+                answer=inputdlg({'Podaj stala: '},'Stala',1,{'0'});
+                filler=str2num(answer{1});
+                for i=1:nancount;
+                    data(nanindexes(i))=filler;
+                end
+            case 'Srednia'
+                filler=sum/count;
+                for i=1:nancount
+                    data(nanindexes(i))=filler;
+                end
+            case 'Wartosc losowa'
+                answer=inputdlg([{'Podaj zakres: '} {''}],'Zakres losowania',[1 1],[{'0'} {'1'}]);%okienko siê zepsu³o, chuj wie czemu
+                a=str2num(answer{1}); b=str2num(answer{2});
+                for i=1:nancount
+                   data(nanindexes(i))=(b-a)*rand+a;%ew. randi([a b])
+                end
+        end
     end
 elseif ischar(data(1))
     nancount=0;
@@ -44,10 +46,12 @@ elseif ischar(data(1))
             nanindexes(nancount)=i;
         end
     end
-    msg=['Wykryto ' num2str(nancount) ' pustych rekordow w ' dataname '. Co chcesz zrobic?'];
-    choice=questdlg(msg,'Faza 1','Stala','Stala');
-    for i=1:nancount
-        data(nanindexes(i))=choice;
+    if nancount~=0
+        msg=['Wykryto ' num2str(nancount) ' pustych rekordow w ' dataname '. Co chcesz zrobic?'];
+        choice=questdlg(msg,'Faza 1','Stala','Stala');
+        for i=1:nancount
+            data(nanindexes(i))=choice;
+        end
     end
 end
 out=data;

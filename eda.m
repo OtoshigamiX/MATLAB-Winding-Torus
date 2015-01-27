@@ -126,52 +126,14 @@ function testbutton_Callback(hObject, eventdata, handles)
 %faza pierwsza % poni¿sza faza pierwsza do powaznej modyfikacji, patrz
 %funkcja absenceOfEmptiness ktora sie zajmie faza pierwsza dla
 %poszczegolnych kolumn
-emptycnt=[];
-for k = 1:(size(handles.maindb))(2)
-    for l=1:(size(handles.maindb))(1)
-        if isempty(handles.maindb{l,k}) | isnan(handles.maindb{l,k});
-            emptycnt(length(emptycnt)+1)=l;
-        end
-    end
-    if ~isempty(emptycnt)
-        choice = questdlg(strcat('Wykryto ',num2str(emptycnt),' pustych rekordów w kolumnie ',handles.maindb.Properties.VarNames(k),'. Co z nimi zrobiæ? '), ...
-            'Faza 1', ...
-            'Sta³a','Œrednia','Losowa wartoœæ','Losowa wartoœæ');
-        switch choice
-            case 'Sta³a'
-                if isstr(handles.maindb{1,k})
-                    for m=1:size(emptycnt)
-                        handles.maindb{m,k} = 'missing';
-                    end
-                else
-                    for m=1:size(emptycnt)
-                        handles.maindb{m,k} = 0;
-                    end
-                end
-            case 'Œrednia'
-                if iscellstr(handles.maindb{1,k})
-                    for m=1:size(emptycnt)
-                        h = msgbox('Niedostêpne dla wartoœci nieliczbowych','Uwaga!');
-                    end
-                else
-                    for m=1:size(emptycnt)
-                        handles.maindb{m,k} = mean(handles.maindb.(handles.maindb.Properties.VarNames(k)));
-                    end
-                end
-            case 'Losowa wartoœæ'
-                if iscellstr(handles.maindb{1,k})
-                    for m=1:size(emptycnt)
-                        h = msgbox('Niedostêpne dla wartoœci nieliczbowych','Uwaga!'); %placeholder
-                    end
-                else
-                    for m=1:size(emptycnt)
-                        handles.maindb{m,k} = mean(handles.maindb.(handles.maindb.Properties.VarNames(k))); %placeholder
-                    end
-                end
-        end
-    end
-    emptycnt = [];
+[m n]=size(handles.maindb);
+for k = 1:n;
+    data=dataset();
+    data.(k)=absenceOfEmptiness(handles.maindb.(handles.maindb.Properties.VarNames{k}),handles.maindb.Properties.VarNames{k});
 end
+data.Properties.VarNames=handles.maindb.Properties.VarNames;
+handles.maindb=data;
+guidata(hObject, handles); %TODO: odœwie¿enie tabelki wyœwietlanej w GUI
 %faza druga
 
     
