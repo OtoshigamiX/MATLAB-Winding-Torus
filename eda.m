@@ -123,7 +123,9 @@ function maindbmenu_Callback(hObject, eventdata, handles)
 
 % --- Executes on button press in testbutton.
 function testbutton_Callback(hObject, eventdata, handles)
-%faza pierwsza
+%faza pierwsza % poni¿sza faza pierwsza do powaznej modyfikacji, patrz
+%funkcja absenceOfEmptiness ktora sie zajmie faza pierwsza dla
+%poszczegolnych kolumn
 emptycnt=[];
 for k = 1:(size(handles.maindb))(2)
     for l=1:(size(handles.maindb))(1)
