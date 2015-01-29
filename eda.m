@@ -82,15 +82,21 @@ def = [{'data\cars.txt'} {','} {'tak'}];
 answer = inputdlg(prompt,dlg_title,num_lines,def);
 %assignin('base','answer',answer);
 loaded_data=dataset('File',answer{1},'Delimiter',answer{2},'ReadVarNames',strcmp('tak',answer{3}));
+[m n]=size(loaded_data);
+data=dataset();
+for k = 1:n;
+    data.(k)=absenceOfEmptiness(loaded_data.(loaded_data.Properties.VarNames{k}),loaded_data.Properties.VarNames{k});
+end
+data.Properties.VarNames=loaded_data.Properties.VarNames;
 %assignin('base','datacell',dataset2cell(loaded_data)); debug
-data_cell=dataset2cell(loaded_data);
+data_cell=dataset2cell(data);
 data_cell(1,:)=[];
 set(handles.datatable,'data',data_cell);
-set(handles.datatable,'ColumnName',loaded_data.Properties.VarNames);
-set(handles.var1menu,'String',loaded_data.Properties.VarNames);
-set(handles.var2menu,'String',loaded_data.Properties.VarNames);
-set(handles.var3menu,'String',loaded_data.Properties.VarNames); %populacja list, które bêd¹ potem potrzebne
-handles.maindb = loaded_data; %zmienna maindb bêdzie naszym datasetem
+set(handles.datatable,'ColumnName',data.Properties.VarNames);
+set(handles.var1menu,'String',data.Properties.VarNames);
+set(handles.var2menu,'String',data.Properties.VarNames);
+set(handles.var3menu,'String',data.Properties.VarNames); %populacja list, które bêd¹ potem potrzebne
+handles.maindb = data; %zmienna maindb bêdzie naszym datasetem
 guidata(hObject, handles); %odœwie¿amy handle
 
 
