@@ -22,7 +22,7 @@ function varargout = eda(varargin)
 
 % Edit the above text to modify the response to help eda
 
-% Last Modified by GUIDE v2.5 29-Jan-2015 21:57:51
+% Last Modified by GUIDE v2.5 29-Jan-2015 22:48:46
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -127,21 +127,6 @@ function maindbmenu_Callback(hObject, eventdata, handles)
 
 
 
-
-% --- Executes on button press in testbutton.
-function testbutton_Callback(hObject, eventdata, handles)
-%faza pierwsza % poni¿sza faza pierwsza do powaznej modyfikacji, patrz
-%funkcja absenceOfEmptiness ktora sie zajmie faza pierwsza dla
-%poszczegolnych kolumn
-[m n]=size(handles.maindb);
-for k = 1:n;
-    data=dataset();
-    data.(k)=absenceOfEmptiness(handles.maindb.(handles.maindb.Properties.VarNames{k}),handles.maindb.Properties.VarNames{k});
-end
-data.Properties.VarNames=handles.maindb.Properties.VarNames;
-handles.maindb=data;
-guidata(hObject, handles); %TODO: odœwie¿enie tabelki wyœwietlanej w GUI
-%faza druga
 
     
 
@@ -368,3 +353,12 @@ end
 
 
 
+
+
+% --- Executes during object creation, after setting all properties.
+function axes1_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to axes1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: place code in OpeningFcn to populate axes1
