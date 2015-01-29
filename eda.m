@@ -303,34 +303,34 @@ zlabel(handles.maindb.Properties.VarNames{tmp_int3});
 
 
 % --- Executes on button press in tourbutton.
-function tourbutton_Callback(hObject, eventdata, handles) % przeklejony kod, jeszcze nie powinien dzia³aæ (swoj¹ drog¹, wymaga chyba oczyszczenia z danych tesktowych)
+function tourbutton_Callback(hObject, eventdata, handles) 
 data=double(stringColsPurger(handles.maindb));
 [n,p] = size(data);
 % Tworzymy wektor czêstoœci
 N = 2*p - 3;
-% U¿ywamy drugiej opcji.
+% U¿ywamy drugiej opcji (w tej metodzie s¹ dwie, ¿eby otrzymaæ ma³y numer niewymierny, pierwsza to pierwiastek).
 lam = mod(exp(1:N),1);
-% Ma³y irrational numer:
+% Ma³y niewymierny numer:
 delt = exp(-5);
-% Get the indices to build the rotations.
-% As in step 1 of the torus method.
+% Zdobywanie indeksów w celu stworzenia rotacji.
+%Krok 1 metody torusa.
 J = 2:p;
 I = ones(1,length(J));
 I = [I, 2*ones(1,length(J)-1)];
 J = [J, 3:p];
-E = eye(p,2); % Basis vectors
-% Just do the tour for some number of iterations.
+E = eye(p,2); % Wektory podstawy
+% Robi tour dla pewnej liczby iteracji.
 maxit = 2150;
 z = zeros(n,2);
 figure(1);
 ph = plot(z(:,1),z(:,2),'o','erasemode','normal');
 axis equal, axis off
-% Use some Handle Graphics to remove flicker.
+% Takie ustawienie zredukuje migotanie.
 set(gcf,'backingstore','off','renderer',...
     'painters','DoubleBuffer','on')
-% Start the tour.
+% Rozpoczêcie trasy.
 for k = 1:maxit
-    % Find the rotation matrix.
+    % Szukanie macierzy rotacji.
     Q = eye(p);
     for j = 1:N
         dum = eye(p);
@@ -340,13 +340,13 @@ for k = 1:maxit
         dum(J(j),I(j)) = sin(lam(j)*k*delt);
         Q = Q*dum;
     end
-    % Rotate basis vectors.
+    % Rotacja wektorów podstawy.
     A = Q*E;
-    % Project onto the new basis vectors.
+    % Projekcja na nowe wektory podstawy.
     z = data*A;
-    % Plot the transformed data.
+    % Wykres przetransformowanych danych.
     set(ph,'xdata',z(:,1),'ydata',z(:,2))
-    % Forces Matlab to plot the data.
+    % Wymusza rysowanie danych przez MATLABa.
     pause(0.02)
 end
 
