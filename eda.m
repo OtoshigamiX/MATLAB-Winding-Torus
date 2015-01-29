@@ -22,7 +22,7 @@ function varargout = eda(varargin)
 
 % Edit the above text to modify the response to help eda
 
-% Last Modified by GUIDE v2.5 25-Jan-2015 15:13:38
+% Last Modified by GUIDE v2.5 29-Jan-2015 21:57:51
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -57,6 +57,7 @@ handles.output = hObject;
 
 % Update handles structure
 guidata(hObject, handles);
+imshow('agh.jpg', 'Parent', handles.axes1)
 
 % UIWAIT makes eda wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
@@ -160,8 +161,8 @@ else
     tmp_median=num2str(median(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int})));
     tmp_q3=num2str(quantile(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int}),.75));
     tmp_mean=num2str(mean(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int})));
-    %main_str=strcat(tmp_str,'\n',tmp_max,char(13),tmp_min,'\n',tmp_q1,'\n',tmp_median,'\n',tmp_q3,'\n',tmp_mean);
-    main_str=sprintf('%s \n Maksimum : %s \n Minimum : %s \n Pierwszy kwantyl: %s \n  Mediana : %s \n Trzeci kwantyl: %s \n Œrednia: %s \n',tmp_str,tmp_max,tmp_min,tmp_q1,tmp_median,tmp_q3,tmp_mean);
+    tmp_std=num2str(std(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int})));
+    main_str=sprintf('%s \n Maksimum : %s \n Minimum : %s \n Pierwszy kwantyl: %s \n  Mediana : %s \n Trzeci kwantyl: %s \n Œrednia: %s \n Odch. stand: %s \n',tmp_str,tmp_max,tmp_min,tmp_q1,tmp_median,tmp_q3,tmp_mean,tmp_std);
     set(handles.text1,'String',main_str); 
 end
 
@@ -194,8 +195,8 @@ else
     tmp_median=num2str(median(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int})));
     tmp_q3=num2str(quantile(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int}),.75));
     tmp_mean=num2str(mean(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int})));
-    %main_str=strcat(tmp_str,'\n',tmp_max,char(13),tmp_min,'\n',tmp_q1,'\n',tmp_median,'\n',tmp_q3,'\n',tmp_mean);
-    main_str=sprintf('%s \n Maksimum : %s \n Minimum : %s \n Pierwszy kwantyl: %s \n  Mediana : %s \n Trzeci kwantyl: %s \n Œrednia: %s \n',tmp_str,tmp_max,tmp_min,tmp_q1,tmp_median,tmp_q3,tmp_mean);
+    tmp_std=num2str(std(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int})));
+     main_str=sprintf('%s \n Maksimum : %s \n Minimum : %s \n Pierwszy kwantyl: %s \n  Mediana : %s \n Trzeci kwantyl: %s \n Œrednia: %s \n Odch. stand: %s \n',tmp_str,tmp_max,tmp_min,tmp_q1,tmp_median,tmp_q3,tmp_mean,tmp_std);
     set(handles.text2,'String',main_str); 
 end
 
@@ -229,8 +230,8 @@ else
     tmp_median=num2str(median(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int})));
     tmp_q3=num2str(quantile(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int}),.75));
     tmp_mean=num2str(mean(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int})));
-    %main_str=strcat(tmp_str,'\n',tmp_max,char(13),tmp_min,'\n',tmp_q1,'\n',tmp_median,'\n',tmp_q3,'\n',tmp_mean);
-    main_str=sprintf('%s \n Maksimum : %s \n Minimum : %s \n Pierwszy kwantyl: %s \n  Mediana : %s \n Trzeci kwantyl: %s \n Œrednia: %s \n',tmp_str,tmp_max,tmp_min,tmp_q1,tmp_median,tmp_q3,tmp_mean);
+    tmp_std=num2str(std(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int})));
+    main_str=sprintf('%s \n Maksimum : %s \n Minimum : %s \n Pierwszy kwantyl: %s \n  Mediana : %s \n Trzeci kwantyl: %s \n Œrednia: %s \n Odch. stand: %s \n',tmp_str,tmp_max,tmp_min,tmp_q1,tmp_median,tmp_q3,tmp_mean,tmp_std);
     set(handles.text3,'String',main_str); 
 end
 
@@ -300,7 +301,8 @@ tmp_int = get(handles.var1menu,'Value');
 tmp_int2 = get(handles.var2menu,'Value');
 figure(1);
 scatter(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int}),handles.maindb.(handles.maindb.Properties.VarNames{tmp_int2}));
-title(handles.maindb.Properties.VarNames{tmp_int});
+xlabel(handles.maindb.Properties.VarNames{tmp_int});
+ylabel(handles.maindb.Properties.VarNames{tmp_int2});
 
 
 % --- Executes on button press in scatter3button.
@@ -310,7 +312,9 @@ tmp_int2 = get(handles.var2menu,'Value');
 tmp_int3 = get(handles.var3menu,'Value');
 figure(1);
 scatter3(handles.maindb.(handles.maindb.Properties.VarNames{tmp_int}),handles.maindb.(handles.maindb.Properties.VarNames{tmp_int2}),handles.maindb.(handles.maindb.Properties.VarNames{tmp_int3}));
-title(handles.maindb.Properties.VarNames{tmp_int});
+xlabel(handles.maindb.Properties.VarNames{tmp_int});
+ylabel(handles.maindb.Properties.VarNames{tmp_int2});
+zlabel(handles.maindb.Properties.VarNames{tmp_int3});
 
 
 % --- Executes on button press in tourbutton.
@@ -360,3 +364,7 @@ for k = 1:maxit
     % Forces Matlab to plot the data.
     pause(0.02)
 end
+
+
+
+
