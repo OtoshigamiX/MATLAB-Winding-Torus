@@ -31,7 +31,7 @@ if isnumeric(data(1))
                 end
             case 'Wartosc losowa'
                 prompt=[{'Podaj zakres:'} {''}];
-                answer=inputdlg(prompt,'Zakres losowania',[1 1]',[{'0'} {'1'}]);%okienko siê zepsu³o, chuj wie czemu
+                answer=inputdlg(prompt,'Zakres losowania',[1 1]',[{'0'} {'1'}]);
                 a=str2num(answer{1}); b=str2num(answer{2});
                 for i=1:nancount
                    data(nanindexes(i))=(b-a)*rand+a;%ew. randi([a b])
