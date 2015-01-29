@@ -1,14 +1,13 @@
 function out=stringColsPurger(data)
 [m,n]=size(data);
 count=0;
-index=[];
+index={};
 for i = 1:n
     if ischar(data{1,i})
         count=count+1;
         index(count)=data.Properties.VarNames(i);
     end
 end
-assignin('base','index',index);
 [m,n]=size(index);
 for i=1:n
     data.(index{i})=[];
